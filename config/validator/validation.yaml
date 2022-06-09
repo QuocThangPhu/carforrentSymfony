@@ -1,0 +1,11 @@
+App\Entity\Product:
+  properties:
+    name:
+      - NotNull:
+      - Type: string
+    price:
+      - NotNull: ~
+      - Type: integer
+    picture:
+      - NotNull: ~
+      - Type: string
