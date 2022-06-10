@@ -53,8 +53,6 @@ class ProductController extends AbstractController
      */
     public function show(Product $product): Response
     {
-        // or render a template
-        // in the template, print things with {{ product.name }}
          return $this->render('product/show.html.twig', ['product' => $product]);
     }
 
@@ -86,7 +84,6 @@ class ProductController extends AbstractController
     public function findProductByName(ManagerRegistry $doctrine, string $name): Response
     {
         $products = $doctrine->getRepository(Product::class)->findByName($name);
-//        return $this->render('product/show.html.twig', ['product' => $product]);
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
