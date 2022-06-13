@@ -65,7 +65,11 @@ class ProductController extends AbstractController
         $product = $entityManager->getRepository(Product::class)->find($id);
         if (!$product) {
             throw $this->createNotFoundException(
+<<<<<<< HEAD
                 'No product found for id ' . $id
+=======
+                'No product found for id '.$id
+>>>>>>> f62e8f4788244a6d81ec57b1ab3c863dcc4a3347
             );
         }
         $product->setName('apple');
