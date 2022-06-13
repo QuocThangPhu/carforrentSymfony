@@ -39,21 +39,6 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Product[] Returns an array of Product objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
     public function findByName(string $name): array
     {
         $entityManager = $this->getEntityManager();
@@ -64,7 +49,6 @@ class ProductRepository extends ServiceEntityRepository
             WHERE p.name = :name'
         )->setParameter('name', $name);
 
-        // returns an array of Product objects
         return $query->getResult();
     }
 }
