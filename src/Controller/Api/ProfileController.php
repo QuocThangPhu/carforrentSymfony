@@ -15,7 +15,7 @@ class ProfileController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json([
-            'message' => 'home user'
+            'message' => 'Welcome to your USER!'
         ]);
     }
 }

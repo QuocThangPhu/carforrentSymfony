@@ -15,7 +15,7 @@ class AdminController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json([
-            'message' => 'home admin'
+            'message' => 'Welcome to your ADMIN!'
         ]);
     }
 }
