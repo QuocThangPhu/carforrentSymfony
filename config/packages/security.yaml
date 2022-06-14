@@ -13,14 +13,27 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/api
+            stateless: true
+            jwt: ~
         main:
             lazy: true
             provider: app_user_provider
+
             form_login:
                 login_path: login
                 check_path: login
                 enable_csrf: true
-                default_target_path: profile
+                default_target_path: login
             logout:
                 path: logout
                 target: login
@@ -41,6 +54,10 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/profile, roles: ROLE_USER }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 when@test:
     security:
         password_hashers:

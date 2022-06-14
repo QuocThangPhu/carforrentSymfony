@@ -12,6 +12,9 @@ class LoginController extends AbstractController
     #[Route('/login', name: 'login')]
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin');
+        }
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('profile');
         }
