@@ -6,23 +6,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ListCarRequest extends AbstractRequest
 {
-    #[Assert\Blank]
     #[Assert\Type('string')]
-    private ?string $color = '';
+    private ?string $color = self::STRING_DEFAULT;
 
     #[Assert\Type('string')]
-    private ?string $brand = '';
+    private ?string $brand = self::STRING_DEFAULT;
 
     #[Assert\Type('int')]
-    private ?int $seats = 0;
+    private ?int $seats = self::INT_DEFAULT;
 
     #[Assert\Type('int')]
-    private ?int $limit = 10;
+    private ?int $limit = self::LIMIT_DEFAULT;
 
     #[Assert\Choice(
-        choices: ['created', 'price'],
+        choices: self::ORDER_BY_LIST,
     )]
-    private ?string $orderBy  = 'created.asc';
+    private ?string $orderBy = self::ORDER_BY_DEFAULT;
+
+    #[Assert\Choice(
+        choices: self::ORDER_TYPE_LIST,
+    )]
+    private ?string $orderType = self::ORDER_TYPE_DEFAULT;
 
     /**
      * @return string|null
@@ -102,5 +106,21 @@ class ListCarRequest extends AbstractRequest
     public function setLimit(int $limit): void
     {
         $this->limit = $limit;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOrderType(): ?string
+    {
+        return $this->orderType;
+    }
+
+    /**
+     * @param string|null $orderType
+     */
+    public function setOrderType(?string $orderType): void
+    {
+        $this->orderType = $orderType;
     }
 }

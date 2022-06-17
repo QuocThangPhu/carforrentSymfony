@@ -9,10 +9,9 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class BaseRepository extends ServiceEntityRepository
 {
-
     protected string $alias;
 
-    public function __construct(ManagerRegistry $registry, string $entityClass = '',  $alias = '')
+    public function __construct(ManagerRegistry $registry, string $entityClass = '', $alias = '')
     {
         parent::__construct($registry, $entityClass);
         $this->alias = $alias;
@@ -29,26 +28,13 @@ class BaseRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    protected function sortBy(QueryBuilder $cars, string $orderBy): QueryBuilder
+    protected function sortBy(QueryBuilder $cars, string $orderBy, string $orderType): QueryBuilder
     {
-        if (empty($orderBy)) {
+        if (empty($orderBy) || empty($orderType)) {
             return $cars;
         }
-        $orderBy = explode('.', $orderBy);
-        $field = $orderBy[0];
-        $order = $orderBy[1];
-        switch ($field) {
-            case 'created':
-                $cars = $cars->orderBy($this->alias . ".createdAt", $order);
-                break;
 
-            case 'price':
-                $cars = $cars->orderBy($this->alias . ".$field", $order);
-                break;
-            default:
-                break;
-        }
-        return $cars;
+        return $cars->orderBy($this->alias . ".$orderBy", $orderType);
     }
 
     protected function filter(QueryBuilder $cars, string $field, mixed $value): QueryBuilder

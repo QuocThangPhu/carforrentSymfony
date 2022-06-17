@@ -8,7 +8,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class ImageFixtures extends Fixture
 {
-
     public function load(ObjectManager $manager)
     {
         $image = new Image();

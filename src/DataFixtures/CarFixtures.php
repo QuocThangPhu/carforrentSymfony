@@ -11,7 +11,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class CarFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function load(ObjectManager $manager)
     {
         foreach ($this->getCarData() as [$id, $name, $description, $color, $brand, $price, $seats, $year]) {

@@ -6,7 +6,7 @@ use App\Entity\Car;
 
 class CarTransformer
 {
-    public function formArray(Car $car): array
+    public function fromArray(Car $car): array
     {
          return [
             'id' => $car->getId(),
@@ -19,14 +19,14 @@ class CarTransformer
             'year' => $car->getYear(),
             'thumbnail' => $car->getThumbnailId()->jsonParse(),
             'createUser' => $car->getCreatedUserId()->jsonParse()
-        ];
+         ];
     }
 
     public function toArray(array $cars): array
     {
         $result = [];
         foreach ($cars as $key => $car) {
-            $result[$key] = $this->formArray($car);
+            $result[$key] = $this->fromArray($car);
         }
         return $result;
     }

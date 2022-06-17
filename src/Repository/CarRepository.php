@@ -18,6 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
 class CarRepository extends BaseRepository
 {
     const CAR_ALIAS = 'c';
+    const FIRST_RESULT = 0;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,8 +31,8 @@ class CarRepository extends BaseRepository
         $cars = $this->filter($cars, 'color', $listCarRequest->getColor());
         $cars = $this->andFilter($cars, 'brand', $listCarRequest->getBrand());
         $cars = $this->andFilter($cars, 'seats', $listCarRequest->getSeats());
-        $cars = $this->sortBy($cars, $listCarRequest->getOrderBy());
-        $cars->setMaxResults($listCarRequest->getLimit())->setFirstResult(0);
+        $cars = $this->sortBy($cars, $listCarRequest->getOrderBy(), $listCarRequest->getOrderType());
+        $cars->setMaxResults($listCarRequest->getLimit())->setFirstResult(static::FIRST_RESULT);
 
         return $cars->getQuery()->getResult();
     }
