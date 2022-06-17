@@ -13,6 +13,9 @@ class ListCarRequest extends AbstractRequest
     private ?string $brand = self::STRING_DEFAULT;
 
     #[Assert\Type('int')]
+    #[Assert\Choice(
+        choices: self::SEATS_LIST,
+    )]
     private ?int $seats = self::INT_DEFAULT;
 
     #[Assert\Type('int')]

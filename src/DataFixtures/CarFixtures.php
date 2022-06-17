@@ -47,7 +47,7 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
             [3, 'Kia Carens AT', 'Kia Carens AT description', 'Blue', 'Kia', 435, 7, 2019],
             [4, 'Chevrolet Camaro Badge', 'Chevrolet Camaro Badge Description', 'Yellow', 'Chevrolet', 500, 4, 2022],
             [5, 'BMW 4 Series Convertible 2021', 'BMW 4 Series Convertible 2021 Description', 'Green', 'BMW', 700, 4, 2021],
-            [6, 'Lamborghini SVJ', 'Lamborghini SVJ description', 'Yellow', 'Lamborghini', 800, 2, 2019],
+            [6, 'Lamborghini SVJ', 'Lamborghini SVJ description', 'Yellow', 'Lamborghini', 800, 16, 2019],
         ];
     }
 

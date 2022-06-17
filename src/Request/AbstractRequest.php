@@ -8,6 +8,7 @@ abstract class AbstractRequest
     const VALUE_DEFAULT = null;
     const STRING_DEFAULT = null;
     const INT_DEFAULT = null;
+    const SEATS_LIST = [4, 7 , 16];
     const ORDER_BY_LIST = ['createdAt', 'price'];
     const ORDER_BY_DEFAULT = 'createdAt';
     const ORDER_TYPE_LIST = ['desc', 'asc'];
