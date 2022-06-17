@@ -4,22 +4,16 @@ namespace App\Transformer;
 
 use App\Entity\Car;
 
-class CarTransformer
+class CarTransformer extends BaseTransformer
 {
+    const PARAMS = ['id' ,'name' ,'description' ,'color' ,'brand' ,'price' ,'seats' ,'year'];
     public function fromArray(Car $car): array
     {
-         return [
-            'id' => $car->getId(),
-            'name' => $car->getName(),
-            'description' => $car->getDescription(),
-            'color' => $car->getColor(),
-            'brand' => $car->getBrand(),
-            'price' => $car->getPrice(),
-            'seats' => $car->getSeats(),
-            'year' => $car->getYear(),
-            'thumbnail' => $car->getThumbnailId()->jsonParse(),
-            'createUser' => $car->getCreatedUserId()->jsonParse()
-         ];
+        $result = $this->transform($car, static::PARAMS);
+        $result['thumbnail'] = $car->getThumbnailId()->jsonParse();
+        $result['createUser'] = $car->getCreatedUserId()->jsonParse();
+
+        return $result;
     }
 
     public function toArray(array $cars): array
