@@ -33,8 +33,8 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
                 ->setSeats($seats)
                 ->setYear($year)
                 ->setCreatedAt($now)
-                ->setCreatedUser($createdUser)
-                ->setThumbnail($imagePath);
+                ->setCreatedUserId($createdUser)
+                ->setThumbnailId($imagePath);
             $manager->persist($car);
         }
         $manager->flush();
@@ -46,6 +46,9 @@ class CarFixtures extends Fixture implements DependentFixtureInterface
             [1, 'Mercedes C200 Exclusive', 'Mercedes C200 Exclusive Description', 'Red', 'Mercedes', 546, 4, 2020],
             [2, 'Vinfast VF9', 'Vinfast VF9 Description', 'White', 'Vinfast', 457, 7, 2022],
             [3, 'Kia Carens AT', 'Kia Carens AT description', 'Blue', 'Kia', 435, 7, 2019],
+            [4, 'Chevrolet Camaro Badge', 'Chevrolet Camaro Badge Description', 'Yellow', 'Chevrolet', 500, 4, 2022],
+            [5, 'BMW 4 Series Convertible 2021', 'BMW 4 Series Convertible 2021 Description', 'Green', 'BMW', 700, 4, 2021],
+            [6, 'Lamborghini SVJ', 'Lamborghini SVJ description', 'Yellow', 'Lamborghini', 800, 2, 2019],
         ];
     }
 

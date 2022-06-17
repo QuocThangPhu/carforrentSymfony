@@ -37,15 +37,15 @@ class Car extends BaseEntity
     private $year;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $created_at;
+    private $createdAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'cars')]
     #[ORM\JoinColumn(nullable: false)]
-    private $created_user;
+    private $createdUserId;
 
     #[ORM\OneToOne(inversedBy: 'car', targetEntity: Image::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private $thumbnail;
+    private $thumbnailId;
 
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: Rent::class, orphanRemoval: true)]
     private $rents;
@@ -146,36 +146,36 @@ class Car extends BaseEntity
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getCreatedUser(): ?User
+    public function getCreatedUserId(): ?User
     {
-        return $this->created_user;
+        return $this->createdUserId;
     }
 
-    public function setCreatedUser(?User $created_user): self
+    public function setCreatedUserId(?User $createdUserId): self
     {
-        $this->created_user = $created_user;
+        $this->createdUserId = $createdUserId;
 
         return $this;
     }
 
-    public function getThumbnail(): ?Image
+    public function getThumbnailId(): ?Image
     {
-        return $this->thumbnail;
+        return $this->thumbnailId;
     }
 
-    public function setThumbnail(Image $thumbnail): self
+    public function setThumbnailId(Image $thumbnailId): self
     {
-        $this->thumbnail = $thumbnail;
+        $this->thumbnailId = $thumbnailId;
 
         return $this;
     }

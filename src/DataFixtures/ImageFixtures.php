@@ -26,10 +26,28 @@ class ImageFixtures extends Fixture
         $image2->setCreatedAt(new \DateTimeImmutable());
         $manager->persist($image2);
 
+        $image4 = new Image();
+        $image4->setPath('http://diggory.me/upload/75400a40e54ffccb2c969e085e84d9c1amir-hosseini-NvyfHCDhvz0-unsplash.jpg');
+        $image4->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($image4);
+
+        $image5 = new Image();
+        $image5->setPath('http://diggory.me/upload/6280b7b8c39f388d2fe14a1940119a69bmw-4-series-convertible-g23-2-59d6.jpg');
+        $image5->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($image5);
+
+        $image6 = new Image();
+        $image6->setPath('http://diggory.me/upload/3ba687c2546378257249bc135a3cf792wes-tindel-F-3i7U7B7YU-unsplash.jpg');
+        $image6->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($image6);
+
         $manager->flush();
 
-        $this->addReference('image3', $image);
-        $this->addReference('image1', $image1);
-        $this->addReference('image2', $image2);
+        $this->addReference('image1', $image);
+        $this->addReference('image2', $image1);
+        $this->addReference('image3', $image2);
+        $this->addReference('image4', $image4);
+        $this->addReference('image5', $image5);
+        $this->addReference('image6', $image6);
     }
 }

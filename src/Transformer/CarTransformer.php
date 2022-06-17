@@ -17,16 +17,16 @@ class CarTransformer
             'price' => $car->getPrice(),
             'seats' => $car->getSeats(),
             'year' => $car->getYear(),
-            'thumbnail' => $car->getThumbnail()->jsonParse(),
-            'createUser' => $car->getCreatedUser()->jsonParse()
+            'thumbnail' => $car->getThumbnailId()->jsonParse(),
+            'createUser' => $car->getCreatedUserId()->jsonParse()
         ];
     }
 
-    public function toArray(array $cars)
+    public function toArray(array $cars): array
     {
         $result = [];
-        foreach ($cars as $car) {
-            $result = $this->formArray($car);
+        foreach ($cars as $key => $car) {
+            $result[$key] = $this->formArray($car);
         }
         return $result;
     }

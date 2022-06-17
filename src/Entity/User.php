@@ -6,12 +6,14 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -29,7 +31,7 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\OneToMany(mappedBy: 'created_user', targetEntity: Car::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'createdUserId', targetEntity: Car::class, orphanRemoval: true)]
     private $cars;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Rent::class, orphanRemoval: true)]
@@ -74,7 +76,7 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
+        $roles[] = static::ROLE_USER;
 
         return array_unique($roles);
     }
@@ -99,15 +101,6 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
         $this->password = $password;
 
         return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     /**
@@ -138,7 +131,7 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
     {
         if (!$this->cars->contains($car)) {
             $this->cars[] = $car;
-            $car->setCreatedUser($this);
+            $car->setCreatedUserId($this);
         }
 
         return $this;
@@ -147,9 +140,8 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
     public function removeCar(Car $car): self
     {
         if ($this->cars->removeElement($car)) {
-            // set the owning side to null (unless already changed)
-            if ($car->getCreatedUser() === $this) {
-                $car->setCreatedUser(null);
+            if ($car->getCreatedUserId() === $this) {
+                $car->setCreatedUserId(null);
             }
         }
 
@@ -186,11 +178,17 @@ class User extends BaseEntity implements UserInterface, PasswordAuthenticatedUse
         return $this;
     }
 
-    public function jsonParse()
+    #[ArrayShape(['id' => "int|null", 'name' => "mixed"])]
+    public function jsonParse(): array
     {
         return [
             'id' => $this->getId(),
             'name' => $this->getName()
         ];
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
