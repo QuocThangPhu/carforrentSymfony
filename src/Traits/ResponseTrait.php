@@ -3,15 +3,26 @@
 namespace App\Traits;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 trait ResponseTrait
 {
-    public function success(array $data): JsonResponse
+    public function success(array $data, int $status = Response::HTTP_OK, array $headers = []): JsonResponse
     {
-        $jsonResponse = new JsonResponse();
-        return $jsonResponse->setData([
+        $dataResponse = [
             'status' => 'success',
             'data' => $data
-        ]);
+        ];
+
+        return new JsonResponse($dataResponse, $status, $headers);
+    }
+
+    public function error(string $message, int $status = Response::HTTP_BAD_REQUEST, array $headers = []): JsonResponse
+    {
+        $dataResponse = [
+            'status' => 'error',
+            'message' => $message
+        ];
+        return new JsonResponse($dataResponse, $status, $headers);
     }
 }
