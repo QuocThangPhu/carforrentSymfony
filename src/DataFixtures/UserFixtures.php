@@ -13,16 +13,16 @@ class UserFixtures extends Fixture
         $user1 = new User();
         $user1->setName('admin');
         $user1->setEmail('admin@gmail.com');
-        $user1->setPassword('nrYnFldRtWnB9IN5OWsOu6XGEfMsRdhdrQY7OiffpTAj7j0dG6e');
-        $user1->setRoles((array)'{"role": "ROLE_ADMIN"}');
+        $user1->setPassword('$2a$12$7DTRErrSw50hO7A2iL0e8eYSfymgvhX2N6ir5kzSEiFvcbToYantC');
+        $user1->setRoles((array)'"ROLE_ADMIN"');
         $manager->persist($user1);
 
 
         $user2 = new User();
         $user2->setName('user');
         $user2->setEmail('user@gmail.com');
-        $user2->setPassword('nrYnFldRtWnB9IN5OWsOu6XGEfMsRdhdrQY7OiffpTAj7j0dG6e');
-        $user2->setRoles((array)'{"role": "ROLE_USER"}');
+        $user2->setPassword('$2a$12$7DTRErrSw50hO7A2iL0e8eYSfymgvhX2N6ir5kzSEiFvcbToYantC');
+        $user2->setRoles((array)'"ROLE_USER"');
         $manager->persist($user2);
 
         $manager->flush();

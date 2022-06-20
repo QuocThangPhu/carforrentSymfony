@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Request;
+namespace App\Transfer;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ListCarRequest extends AbstractRequest
+class FilterTransfer extends BaseTransfer
 {
     #[Assert\Type('string')]
     private ?string $color = self::STRING_DEFAULT;

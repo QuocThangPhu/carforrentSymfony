@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Request;
+namespace App\Transfer;
 
-abstract class AbstractRequest
+abstract class BaseTransfer
 {
     const LIMIT_DEFAULT = 10;
     const VALUE_DEFAULT = null;
@@ -14,7 +14,7 @@ abstract class AbstractRequest
     const ORDER_TYPE_LIST = ['desc', 'asc'];
     const ORDER_TYPE_DEFAULT = 'asc';
 
-    public function fromArray(array $query)
+    public function transfer(array $query): static
     {
         foreach ($query as $key => $value) {
             $setter = 'set' . ucfirst($key);
@@ -23,5 +23,6 @@ abstract class AbstractRequest
             }
             $this->{$setter}($value);
         }
+        return $this;
     }
 }

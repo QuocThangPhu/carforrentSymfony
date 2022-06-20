@@ -35,6 +35,6 @@ class UserRepository extends BaseRepository implements PasswordUpgraderInterface
 
         $user->setPassword($newHashedPassword);
 
-        $this->add($user, true);
+        $this->save($user);
     }
 }
