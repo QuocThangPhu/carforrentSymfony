@@ -4,26 +4,31 @@ namespace App\Service;
 
 use App\Entity\Car;
 use App\Mapper\AddCarTransferToCar;
-use App\Mapper\PutCarRequestToCar;
+use App\Mapper\PatchCarTransferToCar;
+use App\Mapper\PutCarTransferToCar;
 use App\Repository\CarRepository;
 use App\Transfer\CarTransfer;
 use App\Transfer\FilterTransfer;
-use App\Transfer\UpdateCarTransfer;
+use App\Transfer\UpdateWithMethodPutCarTransfer;
+use App\Transfer\UpdateWithMethodPatchCarTransfer;
 
 class CarService
 {
     private CarRepository $carRepository;
     private AddCarTransferToCar $carTransferToCar;
-    private PutCarRequestToCar $putCarRequestToCar;
+    private PutCarTransferToCar $putCarTransferToCar;
+    private PatchCarTransferToCar $patchCarTransferToCar;
 
     public function __construct(
         CarRepository $carRepository,
         AddCarTransferToCar $carTransferToCar,
-        PutCarRequestToCar $putCarRequestToCar
+        PutCarTransferToCar $putCarTransferToCar,
+        PatchCarTransferToCar $patchCarTransferToCar
     ) {
         $this->carRepository = $carRepository;
         $this->carTransferToCar = $carTransferToCar;
-        $this->putCarRequestToCar = $putCarRequestToCar;
+        $this->putCarTransferToCar = $putCarTransferToCar;
+        $this->patchCarTransferToCar = $patchCarTransferToCar;
     }
 
     public function getCars(FilterTransfer $filterTransfer)
@@ -38,9 +43,16 @@ class CarService
         return $car;
     }
 
-    public function put(Car $car, UpdateCarTransfer $updateCarTransfer): Car
+    public function put(Car $car, UpdateWithMethodPutCarTransfer $updateCarTransfer): Car
     {
-        $updatedCar = $this->putCarRequestToCar->mapper($car, $updateCarTransfer);
+        $updatedCar = $this->putCarTransferToCar->mapper($car, $updateCarTransfer);
+        $this->carRepository->save($updatedCar);
+        return $car;
+    }
+
+    public function patch(Car $car, UpdateWithMethodPatchCarTransfer $updateCarTransfer): Car
+    {
+        $updatedCar = $this->patchCarTransferToCar->mapper($car, $updateCarTransfer);
         $this->carRepository->save($updatedCar);
         return $car;
     }

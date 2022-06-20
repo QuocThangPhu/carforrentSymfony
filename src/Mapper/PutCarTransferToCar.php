@@ -7,10 +7,10 @@ use App\Entity\User;
 use App\Repository\ImageRepository;
 use App\Repository\UserRepository;
 use App\Transfer\CarTransfer;
-use App\Transfer\UpdateCarTransfer;
+use App\Transfer\UpdateWithMethodPutCarTransfer;
 use Symfony\Component\Security\Core\Security;
 
-class PutCarRequestToCar
+class PutCarTransferToCar
 {
     private ImageRepository $imageRepository;
     private UserRepository $userRepository;
@@ -21,7 +21,7 @@ class PutCarRequestToCar
         $this->userRepository = $userRepository;
     }
 
-    public function mapper(Car $car, UpdateCarTransfer $updateCarTransfer): Car
+    public function mapper(Car $car, UpdateWithMethodPutCarTransfer $updateCarTransfer): Car
     {
         $createdUser = $this->userRepository->find($updateCarTransfer->getCreatedUserId());
         $thumbnailId = $updateCarTransfer->getThumbnail();

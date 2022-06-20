@@ -8,7 +8,8 @@ use App\Service\UploadFileService;
 use App\Traits\ResponseTrait;
 use App\Transfer\CarTransfer;
 use App\Transfer\FilterTransfer;
-use App\Transfer\UpdateCarTransfer;
+use App\Transfer\UpdateWithMethodPutCarTransfer;
+use App\Transfer\UpdateWithMethodPatchCarTransfer;
 use App\Transformer\CarTransformer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,11 +71,11 @@ class CarController extends AbstractController
         return $this->success($result);
     }
 
-    #[Route('/{id}', name: 'update_car', methods: 'PUT')]
+    #[Route('/{id}', name: 'put_car', methods: 'PUT')]
     #[IsGranted('ROLE_ADMIN')]
-    public function updateCar(
+    public function updateWithMethodPutCar(
         Car $car,
-        UpdateCarTransfer $updateCarTransfer,
+        UpdateWithMethodPutCarTransfer $updateCarTransfer,
         Request $request,
         ValidatorInterface $validator,
         CarService $carService,
@@ -82,11 +83,32 @@ class CarController extends AbstractController
     ): JsonResponse {
         $dataRequest = json_decode($request->getContent(), true);
         $carRequest = $updateCarTransfer->transfer($dataRequest);
-        $errors = $validator->validate($car);
+        $errors = $validator->validate($carRequest);
         if (count($errors) > 0) {
             throw new ValidatorException(code: Response::HTTP_BAD_REQUEST);
         }
         $car = $carService->put($car, $carRequest);
+        $result = $carTransformer->fromArray($car);
+        return $this->success($result);
+    }
+
+    #[Route('/{id}', name: 'patch', methods: 'PATCH')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function updateWithMethodPatchCar(
+        Car $car,
+        UpdateWithMethodPatchCarTransfer $UpdateCarTransfer,
+        Request $request,
+        ValidatorInterface $validator,
+        CarService $carService,
+        CarTransformer $carTransformer
+    ): JsonResponse {
+        $dataRequest = json_decode($request->getContent(), true);
+        $carRequest = $UpdateCarTransfer->transfer($dataRequest);
+        $errors = $validator->validate($carRequest);
+        if (count($errors) > 0) {
+            throw new ValidatorException(code: Response::HTTP_BAD_REQUEST);
+        }
+        $car = $carService->patch($car, $carRequest);
         $result = $carTransformer->fromArray($car);
         return $this->success($result);
     }

@@ -2,10 +2,9 @@
 
 namespace App\Transfer;
 
-use App\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UpdateCarTransfer extends BaseTransfer
+class UpdateWithMethodPutCarTransfer extends BaseTransfer
 {
     #[Assert\NotBlank]
     #[Assert\Type('string')]
