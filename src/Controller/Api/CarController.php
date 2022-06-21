@@ -33,10 +33,10 @@ class CarController extends AbstractController
         CarService $carService,
         CarTransformer $carTransformer
     ): JsonResponse {
-        $query = $request->query->all();
-        $filter = $filterTransfer->transfer($query);
+        $dataRequest = $request->query->all();
+        $filter = $filterTransfer->transfer($dataRequest);
         $errors = $validator->validate($filter);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             throw new ValidatorException(code: Response::HTTP_BAD_REQUEST);
         }
         $cars = $carService->getCars($filter);
@@ -63,7 +63,7 @@ class CarController extends AbstractController
         $dataRequest = json_decode($request->getContent(), true);
         $car = $carTransfer->transfer($dataRequest);
         $errors = $validator->validate($car);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             throw new ValidatorException(code: Response::HTTP_BAD_REQUEST);
         }
         $car = $carService->addCar($car);
@@ -84,7 +84,7 @@ class CarController extends AbstractController
         $dataRequest = json_decode($request->getContent(), true);
         $carRequest = $updateCarTransfer->transfer($dataRequest);
         $errors = $validator->validate($carRequest);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             throw new ValidatorException(code: Response::HTTP_BAD_REQUEST);
         }
         $car = $carService->put($car, $carRequest);
@@ -105,7 +105,7 @@ class CarController extends AbstractController
         $dataRequest = json_decode($request->getContent(), true);
         $carRequest = $UpdateCarTransfer->transfer($dataRequest);
         $errors = $validator->validate($carRequest);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             throw new ValidatorException(code: Response::HTTP_BAD_REQUEST);
         }
         $car = $carService->patch($car, $carRequest);
