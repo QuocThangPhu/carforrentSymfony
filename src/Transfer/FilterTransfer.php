@@ -7,104 +7,88 @@ use Symfony\Component\Validator\Constraints as Assert;
 class FilterTransfer extends BaseTransfer
 {
     #[Assert\Type('string')]
-    private ?string $color = self::STRING_DEFAULT;
+    private $color = self::STRING_DEFAULT;
 
     #[Assert\Type('string')]
-    private ?string $brand = self::STRING_DEFAULT;
+    private $brand = self::STRING_DEFAULT;
 
-    #[Assert\Type('int')]
+    #[Assert\Type('numeric')]
     #[Assert\Choice(
         choices: self::SEATS_LIST,
     )]
-    private ?int $seats = self::INT_DEFAULT;
+    private $seats = self::INT_DEFAULT;
 
     #[Assert\Type('int')]
-    private ?int $limit = self::LIMIT_DEFAULT;
+    private $limit = self::LIMIT_DEFAULT;
 
     #[Assert\Choice(
         choices: self::ORDER_BY_LIST,
     )]
-    private ?string $orderBy = self::ORDER_BY_DEFAULT;
+    private $orderBy = self::ORDER_BY_DEFAULT;
 
     #[Assert\Choice(
         choices: self::ORDER_TYPE_LIST,
     )]
-    private ?string $orderType = self::ORDER_TYPE_DEFAULT;
+    private $orderType = self::ORDER_TYPE_DEFAULT;
 
     /**
-     * @return string|null
+     * @return null
      */
-    public function getColor(): ?string
+    public function getColor()
     {
         return $this->color;
     }
 
     /**
-     * @param string|null $color
+     * @param null $color
      */
-    public function setColor(?string $color): void
+    public function setColor($color): void
     {
         $this->color = $color;
     }
 
     /**
-     * @return string|null
+     * @return null
      */
-    public function getBrand(): ?string
+    public function getBrand()
     {
         return $this->brand;
     }
 
     /**
-     * @param string|null $brand
+     * @param null $brand
      */
-    public function setBrand(?string $brand): void
+    public function setBrand($brand): void
     {
         $this->brand = $brand;
     }
 
     /**
-     * @return int|null
+     * @return null
      */
-    public function getSeats(): ?int
+    public function getSeats()
     {
         return $this->seats;
     }
 
     /**
-     * @param int|null $seats
+     * @param null $seats
      */
-    public function setSeats(?int $seats): void
+    public function setSeats($seats): void
     {
         $this->seats = $seats;
     }
 
     /**
-     * @param string|null $orderBy
+     * @return int
      */
-    public function setOrderBy(?string $orderBy): void
-    {
-        $this->orderBy = $orderBy;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getOrderBy(): ?string
-    {
-        return $this->orderBy;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
         return $this->limit;
     }
 
     /**
-     * @param int|null $limit
+     * @param int $limit
      */
     public function setLimit(int $limit): void
     {
@@ -112,17 +96,33 @@ class FilterTransfer extends BaseTransfer
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getOrderType(): ?string
+    public function getOrderBy(): string
+    {
+        return $this->orderBy;
+    }
+
+    /**
+     * @param string $orderBy
+     */
+    public function setOrderBy(string $orderBy): void
+    {
+        $this->orderBy = $orderBy;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderType(): string
     {
         return $this->orderType;
     }
 
     /**
-     * @param string|null $orderType
+     * @param string $orderType
      */
-    public function setOrderType(?string $orderType): void
+    public function setOrderType(string $orderType): void
     {
         $this->orderType = $orderType;
     }

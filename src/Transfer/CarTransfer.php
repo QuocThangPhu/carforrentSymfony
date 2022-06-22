@@ -9,133 +9,143 @@ class CarTransfer extends BaseTransfer
 {
     #[Assert\NotBlank]
     #[Assert\Type('string')]
-    private string $name;
+    private $name;
 
     #[Assert\NotBlank]
     #[Assert\Type('string')]
-    private string $description;
+    private $description;
 
     #[Assert\NotBlank]
     #[Assert\Type('string')]
-    private string $color;
+    private $color;
 
     #[Assert\NotBlank]
     #[Assert\Type('string')]
-    private string $brand;
+    private $brand;
 
     #[Assert\NotBlank]
     #[Assert\Type('integer')]
     #[Assert\Choice(
         choices: self::SEATS_LIST,
     )]
-    private int $seats;
+    private $seats;
 
     #[Assert\NotBlank]
     #[Assert\Type('integer')]
-    private int $year;
+    private $year;
 
     #[Assert\NotBlank]
-    #[Assert\Type('float')]
-    private float $price;
-
-    private User $createdUserId;
-
-    private \DateTimeImmutable $createdAt;
-
-    private $thumbnail;
+    #[Assert\Type('numeric')]
+    private $price;
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param mixed $name
      */
-    public function setName(string $name): void
+    public function setName($name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * @param mixed $description
      */
-    public function setDescription(string $description): void
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getColor(): string
+    public function getColor()
     {
         return $this->color;
     }
 
     /**
-     * @param string $color
+     * @param mixed $color
      */
-    public function setColor(string $color): void
+    public function setColor($color): void
     {
         $this->color = $color;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getBrand(): string
+    public function getBrand()
     {
         return $this->brand;
     }
 
     /**
-     * @param string $brand
+     * @param mixed $brand
      */
-    public function setBrand(string $brand): void
+    public function setBrand($brand): void
     {
         $this->brand = $brand;
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getYear(): int
+    public function getSeats()
+    {
+        return $this->seats;
+    }
+
+    /**
+     * @param mixed $seats
+     */
+    public function setSeats($seats): void
+    {
+        $this->seats = $seats;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getYear()
     {
         return $this->year;
     }
 
     /**
-     * @param int $year
+     * @param mixed $year
      */
-    public function setYear(int $year): void
+    public function setYear($year): void
     {
         $this->year = $year;
     }
 
     /**
-     * @return float
+     * @return mixed
      */
-    public function getPrice(): float
+    public function getPrice()
     {
         return $this->price;
     }
 
     /**
-     * @param float $price
+     * @param mixed $price
      */
-    public function setPrice(float $price): void
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -172,23 +182,6 @@ class CarTransfer extends BaseTransfer
         $this->createdAt = $createdAt;
     }
 
-
-    /**
-     * @return int
-     */
-    public function getSeats(): int
-    {
-        return $this->seats;
-    }
-
-    /**
-     * @param int $seats
-     */
-    public function setSeats(int $seats): void
-    {
-        $this->seats = $seats;
-    }
-
     /**
      * @return mixed
      */
@@ -204,4 +197,10 @@ class CarTransfer extends BaseTransfer
     {
         $this->thumbnail = $thumbnail;
     }
+
+    private User $createdUserId;
+
+    private \DateTimeImmutable $createdAt;
+
+    private $thumbnail;
 }
