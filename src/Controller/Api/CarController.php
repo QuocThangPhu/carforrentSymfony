@@ -62,7 +62,7 @@ class CarController extends AbstractController
         $dataRequest = json_decode($request->getContent(), true);
         $car = $carTransfer->transfer($dataRequest);
         $errors = $carValidator->validatorCarRequest($car);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             return $this->error($errors);
         }
         $car = $carService->addCar($car);
@@ -83,7 +83,7 @@ class CarController extends AbstractController
         $dataRequest = json_decode($request->getContent(), true);
         $carRequest = $updateCarTransfer->transfer($dataRequest);
         $errors = $carValidator->validatorCarRequest($carRequest);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             return $this->error($errors);
         }
         $car = $carService->put($car, $carRequest);
@@ -104,7 +104,7 @@ class CarController extends AbstractController
         $dataRequest = json_decode($request->getContent(), true);
         $carRequest = $UpdateCarTransfer->transfer($dataRequest);
         $errors = $carValidator->validatorCarRequest($carRequest);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             return $this->error($errors);
         }
         $car = $carService->patch($car, $carRequest);

@@ -31,7 +31,7 @@ class ImageController extends AbstractController
         $fileRequest = $request->files->get('image');
         $imageRequest = $imageTransfer->setImage($fileRequest);
         $errors = $imageValidator->validatorImageRequest($imageRequest);
-        if (count($errors) > 0) {
+        if (!empty($errors)) {
             return $this->error($errors);
         }
         $image = $imageService->addImage($fileRequest);
