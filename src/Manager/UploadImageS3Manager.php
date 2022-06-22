@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class UploadImageS3Manager
 {
+    const DIRECTORY = 'upload/';
+
     /**
      * @var S3Client
      */
@@ -29,11 +31,13 @@ class UploadImageS3Manager
         );
     }
 
-    public function upload(File $file)
+    public function upload(File $file): string
     {
-        $fileName = $file->getFilename().".".explode("/",$file->getMimeType())[1];
-        $fileContent= $file->getContent();
-        return $this->getClient()->upload($this->getBucket(),$fileName, $fileContent)->toArray()['ObjectURL'];
+        $fileName = $file->getFilename() . "." . explode("/", $file->getMimeType())[1];
+        $fileContent = $file->getContent();
+        $path = static::DIRECTORY . $fileName;
+        $this->getClient()->upload($this->getBucket(), $path, $fileContent)->toArray()['ObjectURL'];
+        return $path;
     }
 
     /**

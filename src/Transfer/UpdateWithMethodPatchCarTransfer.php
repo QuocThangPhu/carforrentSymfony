@@ -8,139 +8,143 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UpdateWithMethodPatchCarTransfer extends BaseTransfer
 {
     #[Assert\Type('string')]
-    private ?string $name = self::STRING_DEFAULT;
+    private $name = self::STRING_DEFAULT;
 
     #[Assert\Type('string')]
-    private ?string $description = self::STRING_DEFAULT;
+    private $description = self::STRING_DEFAULT;
 
     #[Assert\Type('string')]
-    private ?string $color = self::STRING_DEFAULT;
+    private $color = self::STRING_DEFAULT;
 
     #[Assert\Type('string')]
-    private ?string $brand = self::STRING_DEFAULT;
+    private $brand = self::STRING_DEFAULT;
 
     #[Assert\Type('integer')]
     #[Assert\Choice(
         choices: self::SEATS_LIST,
     )]
-    private ?int $seats = null;
+    private $seats = null;
 
     #[Assert\Type('integer')]
-    private ?int $year = null;
+    private $year = null;
 
-    #[Assert\Type('float')]
-    private ?float $price = null;
+    #[Assert\Type('numeric')]
+    private $price = null;
 
     private $createdUserId;
 
+    private \DateTimeImmutable $createdAt;
+
+    private $thumbnail;
+
     /**
-     * @return string|null
+     * @return null
      */
-    public function getName(): ?string
+    public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @param string|null $name
+     * @param null $name
      */
-    public function setName(?string $name): void
+    public function setName($name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return string|null
+     * @return null
      */
-    public function getDescription(): ?string
+    public function getDescription()
     {
         return $this->description;
     }
 
     /**
-     * @param string|null $description
+     * @param null $description
      */
-    public function setDescription(?string $description): void
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
 
     /**
-     * @return string|null
+     * @return null
      */
-    public function getColor(): ?string
+    public function getColor()
     {
         return $this->color;
     }
 
     /**
-     * @param string|null $color
+     * @param null $color
      */
-    public function setColor(?string $color): void
+    public function setColor($color): void
     {
         $this->color = $color;
     }
 
     /**
-     * @return string|null
+     * @return null
      */
-    public function getBrand(): ?string
+    public function getBrand()
     {
         return $this->brand;
     }
 
     /**
-     * @param string|null $brand
+     * @param null $brand
      */
-    public function setBrand(?string $brand): void
+    public function setBrand($brand): void
     {
         $this->brand = $brand;
     }
 
     /**
-     * @return int|null
+     * @return null
      */
-    public function getSeats(): ?int
+    public function getSeats()
     {
         return $this->seats;
     }
 
     /**
-     * @param int|null $seats
+     * @param null $seats
      */
-    public function setSeats(?int $seats): void
+    public function setSeats($seats): void
     {
         $this->seats = $seats;
     }
 
     /**
-     * @return int|null
+     * @return null
      */
-    public function getYear(): ?int
+    public function getYear()
     {
         return $this->year;
     }
 
     /**
-     * @param int|null $year
+     * @param null $year
      */
-    public function setYear(?int $year): void
+    public function setYear($year): void
     {
         $this->year = $year;
     }
 
     /**
-     * @return float|null
+     * @return null
      */
-    public function getPrice(): ?float
+    public function getPrice()
     {
         return $this->price;
     }
 
     /**
-     * @param float|null $price
+     * @param null $price
      */
-    public function setPrice(?float $price): void
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -192,8 +196,4 @@ class UpdateWithMethodPatchCarTransfer extends BaseTransfer
     {
         $this->thumbnail = $thumbnail;
     }
-
-    private \DateTimeImmutable $createdAt;
-
-    private $thumbnail;
 }

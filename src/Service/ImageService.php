@@ -12,7 +12,7 @@ class ImageService
     private ImageRepository $imageRepository;
     private UploadImageS3Manager $imageS3Manager;
 
-    public function __construct(ImageRepository $imageRepository,UploadImageS3Manager $imageS3Manager)
+    public function __construct(ImageRepository $imageRepository, UploadImageS3Manager $imageS3Manager)
     {
         $this->imageRepository = $imageRepository;
         $this->imageS3Manager = $imageS3Manager;
