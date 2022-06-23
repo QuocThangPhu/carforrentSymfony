@@ -38,6 +38,7 @@ class CarTransfer extends BaseTransfer
     #[Assert\Type('numeric')]
     private $price;
 
+    private $thumbnail;
     /**
      * @return mixed
      */
@@ -151,38 +152,6 @@ class CarTransfer extends BaseTransfer
     }
 
     /**
-     * @return User
-     */
-    public function getCreatedUserId(): User
-    {
-        return $this->createdUserId;
-    }
-
-    /**
-     * @param User $createdUserId
-     */
-    public function setCreatedUserId(User $createdUserId): void
-    {
-        $this->createdUserId = $createdUserId;
-    }
-
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getCreatedAt(): \DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTimeImmutable $createdAt
-     */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
      * @return mixed
      */
     public function getThumbnail()
@@ -197,10 +166,4 @@ class CarTransfer extends BaseTransfer
     {
         $this->thumbnail = $thumbnail;
     }
-
-    private User $createdUserId;
-
-    private \DateTimeImmutable $createdAt;
-
-    private $thumbnail;
 }
