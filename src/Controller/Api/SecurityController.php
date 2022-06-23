@@ -20,8 +20,8 @@ class SecurityController extends AbstractController
     {
         $user = $this->getUser();
         if ($user === null) {
-            $message = 'Unauthorized';
-            return $this->error($message, Response::HTTP_UNAUTHORIZED);
+            $message = ['Unauthorized',Response::HTTP_UNAUTHORIZED];
+            return $this->error($message);
         }
         $token = $tokenManager->create($user);
         $data = [

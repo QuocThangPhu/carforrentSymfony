@@ -21,7 +21,7 @@ class ImageValidator
     public function validatorImageRequest(mixed $param): array
     {
         $errors = $this->validator->validate($param);
-        if (count($errors) >= 1) {
+        if (!empty($errors)) {
             return $this->errorToArray($errors);
         }
 

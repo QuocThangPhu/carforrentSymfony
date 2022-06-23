@@ -7,23 +7,27 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait ResponseTrait
 {
-    public function success(array $data): JsonResponse
+    public function success(array $data, int $status = Response::HTTP_OK): JsonResponse
     {
         $jsonResponse = new JsonResponse();
 
-        return $jsonResponse->setData([
+        $jsonResponse->setData([
             'status' => 'success',
             'data' => $data
         ]);
+        $jsonResponse->setStatusCode($status);
+        return $jsonResponse;
     }
 
-    public function error(array $data): JsonResponse
+    public function error(array $data,int $status = Response::HTTP_BAD_REQUEST): JsonResponse
     {
         $jsonResponse = new JsonResponse();
 
-        return $jsonResponse->setData([
+        $jsonResponse->setData([
             'status' => 'error',
             'errors' => $data
         ]);
+        $jsonResponse->setStatusCode($status);
+        return $jsonResponse;
     }
 }
