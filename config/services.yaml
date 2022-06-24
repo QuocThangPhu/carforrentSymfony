@@ -6,6 +6,11 @@
 parameters:
     brochures_directory: '%kernel.project_dir%/public/uploads/images'
     sqsUrl: '%env(SQS_URL)%'
+    email_host:  '%env(ZOHO_HOST)%'
+    email_username:  '%env(ZOHO_USERNAME)%'
+    email_password:  '%env(ZOHO_PASSWORD)%'
+    email_smtp:  '%env(ZOHO_SMTP)%'
+    email_port:  '%env(ZOHO_PORT)%'
 services:
     # default configuration for services in *this* file
     _defaults:
