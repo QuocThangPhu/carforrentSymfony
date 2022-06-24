@@ -8,6 +8,7 @@
 /vendor/
 /.env
 /.idea
+/.env.test
 ###< symfony/framework-bundle ###
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
