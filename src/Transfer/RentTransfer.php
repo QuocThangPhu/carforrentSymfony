@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Transfer;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 class RentTransfer extends BaseTransfer
@@ -58,5 +59,4 @@ class RentTransfer extends BaseTransfer
     {
         $this->endDate = $endDate;
     }
-
 }

@@ -18,8 +18,7 @@ class AddRentTransferToRent
     public function __construct(
         Security $security,
         CarRepository $carRepository
-    )
-    {
+    ) {
         $this->security = $security;
         $this->carRepository = $carRepository;
     }

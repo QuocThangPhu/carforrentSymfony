@@ -26,8 +26,7 @@ class RentController extends AbstractController
         RentValidator $rentValidator,
         RentService $rentService,
         RentTransformer $rentTransformer
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $dataRequest = json_decode($request->getContent(), true);
         $rentInfo = $rentTransfer->transfer($dataRequest);
         $errors = $rentValidator->validatorRentRequest($rentInfo);
@@ -38,5 +37,4 @@ class RentController extends AbstractController
         $result = $rentTransformer->fromArray($rent);
         return $this->success($result);
     }
-
 }
