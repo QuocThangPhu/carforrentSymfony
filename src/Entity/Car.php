@@ -6,6 +6,7 @@ use App\Repository\CarRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\ArrayShape;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car extends BaseEntity
@@ -208,5 +209,14 @@ class Car extends BaseEntity
         }
 
         return $this;
+    }
+
+    #[ArrayShape(['id' => "int|null", 'name' => "mixed"])]
+    public function jsonParse(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName()
+        ];
     }
 }

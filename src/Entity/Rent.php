@@ -124,4 +124,5 @@ class Rent extends BaseEntity
 
         return $this;
     }
+
 }
