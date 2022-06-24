@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Service;
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-
 
 class MailService
 {

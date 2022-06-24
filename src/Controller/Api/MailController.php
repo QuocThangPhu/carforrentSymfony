@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MailController extends AbstractController
 {
     use ResponseTrait;
+
     #[Route('/', name: 'send_mail', methods: 'GET')]
     public function sendMailToUser(MailService $mailService)
     {
