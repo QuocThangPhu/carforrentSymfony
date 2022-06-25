@@ -12,7 +12,7 @@ class FilterTransfer extends BaseTransfer
     #[Assert\Type('string')]
     private $brand = self::STRING_DEFAULT;
 
-    #[Assert\Type('numeric')]
+    #[Assert\Type('integer')]
     #[Assert\Choice(
         choices: self::SEATS_LIST,
     )]
@@ -64,7 +64,7 @@ class FilterTransfer extends BaseTransfer
     }
 
     /**
-     * @return null
+     * @return mixed
      */
     public function getSeats()
     {
@@ -72,11 +72,11 @@ class FilterTransfer extends BaseTransfer
     }
 
     /**
-     * @param null $seats
+     * @param mixed $seats
      */
     public function setSeats($seats): void
     {
-        $this->seats = $seats;
+        $this->seats = is_numeric($seats) ? (int)$seats : $seats;
     }
 
     /**
