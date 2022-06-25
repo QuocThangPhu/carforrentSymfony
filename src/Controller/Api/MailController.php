@@ -12,7 +12,7 @@ class MailController extends AbstractController
 {
     use ResponseTrait;
 
-    #[Route('/', name: 'send_mail', methods: 'GET')]
+    #[Route('/', name: 'send_mail', methods: 'POST')]
     public function sendMailToUser(MailService $mailService)
     {
         $mailService->sendMail();

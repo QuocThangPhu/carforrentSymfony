@@ -40,6 +40,16 @@ class ImageFixtures extends Fixture
         $image6->setCreatedAt(new \DateTimeImmutable());
         $manager->persist($image6);
 
+        $image7 = new Image();
+        $image7->setPath('http://diggory.me/upload/3ba687c2546378257249bc135a3cf792wes-tindel-F-3i7U7B7YU-unsplash.jpg');
+        $image7->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($image7);
+
+        $image8 = new Image();
+        $image8->setPath('http://diggory.me/upload/3ba687c2546378257249bc135a3cf792wes-tindel-F-3i7U7B7YU-unsplash.jpg');
+        $image8->setCreatedAt(new \DateTimeImmutable());
+        $manager->persist($image8);
+
         $manager->flush();
 
         $this->addReference('image1', $image);
@@ -48,5 +58,7 @@ class ImageFixtures extends Fixture
         $this->addReference('image4', $image4);
         $this->addReference('image5', $image5);
         $this->addReference('image6', $image6);
+        $this->addReference('image7', $image7);
+        $this->addReference('image8', $image8);
     }
 }

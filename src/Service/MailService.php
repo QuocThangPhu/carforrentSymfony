@@ -31,11 +31,11 @@ class MailService
             $mail->Port       = $this->param->get('email_port');
 
             $mail->setFrom('support@diggory.me', 'Mailer');
-            $mail->addAddress('dangtran.khoa@nfq.asia', 'Sayno');
+            $mail->addAddress('thang.phu@nfq.asia', 'Nghia');
 
             $mail->isHTML(true);
-            $mail->Subject = 'Khoa ngu';
-            $mail->Body    = 'Khoa nguuuuuuuuuu';
+            $mail->Subject = 'Nghĩa ngu ngok';
+            $mail->Body    = 'Nghĩa nguuuuuuuuuu';
 
             $mail->send();
             echo 'Message has been sent';
