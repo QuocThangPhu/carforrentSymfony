@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Transfer\MailTransfer;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -15,7 +16,7 @@ class MailService
         $this->param = $param;
     }
 
-    public function sendMail(): void
+    public function sendMail(MailTransfer $mailTransfer): void
     {
         $mail = new PHPMailer(true);
 
@@ -29,13 +30,11 @@ class MailService
             $mail->Password   = $this->param->get('email_password');
             $mail->SMTPSecure = $this->param->get('email_smtp');
             $mail->Port       = $this->param->get('email_port');
-
             $mail->setFrom('support@diggory.me', 'Mailer');
-            $mail->addAddress('thang.phu@nfq.asia', 'Nghia');
-
+            $mail->addAddress($mailTransfer->getMailAddress(), $mailTransfer->getNameOfUser());
             $mail->isHTML(true);
-            $mail->Subject = 'Nghĩa ngu ngok';
-            $mail->Body    = 'Nghĩa nguuuuuuuuuu';
+            $mail->Subject = $mailTransfer->getMailSubject();
+            $mail->Body    = $mailTransfer->getMailBody();
 
             $mail->send();
             echo 'Message has been sent';
